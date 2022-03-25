@@ -3,47 +3,42 @@
 You should explore the contents of this project. It demonstrates a CDK app with an instance of a
 stack (`sagemakerStudioCDK`)
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## How it Works
 
-## Deployment Steps
+This project uses a simple structure for sources, tooling and testing.
+Just execute `make` to see what you can do.
 
-Pre-requisites:
+## How to start
 
-* An AWS profile with permissions to create AWS Identity and Access Management (AWS IAM) roles, Studio domains, and Studio user profiles
-* AWS CLI, authenticated and configured
-* Python 3.6+
-* AWS CDK
-* Git
-* Knowledge on how Amazon Sagemaker Studio works.
+You will need to have Python 3.8 installed. After this you just need to call
+ ```
+ $ make install
+ ```
 
-Step 1: Using your device’s command line, check out our Git repository to a local directory on your device:
+The initialization process also creates a virtualenv within this project, stored under the venv directory.
+It will also install AWS cdk command by calling `npm install -g aws-cdk`.
 
-`git clone https://github.com/aws-samples/aws-cdk-sagemaker-studio`
+### Python
 
-Step 2: Change directories to the new directory that was created during the previous step:
+It is tested with Python 3.8.x.
+You can use `make .venv` to create Python environment for this project.
 
-`cd aws-cdk-sagemaker-studio/`
+To add additional dependencies, for example other CDK libraries, just add
+them to your `setup.py` file and rerun the `make install`
+command.
 
-Step 3: Create a virtual environment:
+### PyTest
 
-`macOS/Linux: python3 -m venv .cdk-venv` <br>
-`Windows: python -m venv .cdk-venv`
+Project uses PyTest for a simple testing approach.
+For reference visit: https://docs.pytest.org/en/latest/index.html
 
-Step 4: Activate the virtual environment after the init process completes, and the virtual environment is created:
+### AWS CDK
 
-`macOS/Linux: source .cdk-venv/bin/activate` <br>
-`Windows: .cdk-venv\Scripts\activate.bat`
+At this point you can now synthesize the CloudFormation template for this code.
 
-Step 5: Install the required dependencies:
+`cdk synth`
 
-`pip3 install -r requirements.txt`
-
-Step 6: Synthesize the templates. AWS CDK apps use code to define the infrastructure, and when run, they produce, or
-“synthesize” an AWS CloudFormation template for each stack defined in the application:
-
-`cdk synthesize`
-
-Step 7: Deploy the solution.
+After this, use deploy command to deploy CloudFormation stack.
 
 `cdk deploy`
 

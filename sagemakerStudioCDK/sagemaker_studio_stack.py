@@ -38,18 +38,14 @@ class SagemakerStudioStack(core.Stack):
 		                                                                               vpc_id=self.vpc_id,
 		                                                                               subnet_ids=self.public_subnet_ids,
 		                                                                               role_sagemaker_studio_users=self.role_sagemaker_studio_domain)
-
-		team_to_add_in_sagemaker_studio = ["datascientist-team-A2", "datascientist-team-A3",
-		                                   "datascientist-team-A4"]
-		for _team in team_to_add_in_sagemaker_studio:
-			my_default_datascience_user = sagemakerStudioConstructs.SagemakerStudioUserConstruct(self,
-			                                                                                     _team,
+		my_default_datascience_user = sagemakerStudioConstructs.SagemakerStudioUserConstruct(self,
+			                                                                                    "DatascientistTeam",
 			                                                                                     sagemaker_domain_id=my_sagemaker_domain.sagemaker_domain_id,
-			                                                                                     user_profile_name=_team)
-			core.CfnOutput(self, f"cfnoutput{_team}",
+			                                                                                     user_profile_name="DatascientistTeam")
+		core.CfnOutput(self, "ArnDatascientistTeam",
 			               value=my_default_datascience_user.user_profile_arn,
 			               description="The User Arn TeamA domain ID",
-			               export_name=F"UserArn{_team}"
+			               export_name="ArnDatascientistTeam"
 			               )
 
 		core.CfnOutput(self, "DomainIdSagemaker",
